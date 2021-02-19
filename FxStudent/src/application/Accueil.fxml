@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerAccueil">
+   <top>
+      <MenuBar fx:id="barMenu" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Etudiants">
+            <items>
+                  <MenuItem fx:id="addMenu" mnemonicParsing="false" onAction="#onAjoutClickEtudiant" text="Ajouter étudiant">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../Downloads/plus%20icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="listMenu" mnemonicParsing="false" onAction="#onShowListClick" text="Consulter liste étudiants">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../Downloads/list%20icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#onclickSubMenuClose" text="Fermer" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #9C2B27;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
