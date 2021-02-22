@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="975.0" style="-fx-background-color: #9C2B27;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerList">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="975.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerList">
 	<center>
 		<AnchorPane fx:id="centerPane" prefHeight="608.0" prefWidth="976.0" BorderPane.alignment="CENTER">
 			<children>
-				<TableView fx:id="table" layoutY="32.0" prefHeight="568.0" prefWidth="900.0" style="-fx-background-color: #9C2B27;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TableView fx:id="table" layoutX="863.0" layoutY="2.0" prefHeight="487.0" prefWidth="975.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
 					<columns>
 						<TableColumn fx:id="colId" prefWidth="185.0" resizable="false" text="ID" />
 						<TableColumn fx:id="colNom" prefWidth="222.0" resizable="false" text="Nom" />
@@ -18,32 +18,35 @@
 						<TableColumn fx:id="colDate" prefWidth="244.0" resizable="false" text="Date de naissance" />
 					</columns>
 				</TableView>
+            <Button layoutX="866.0" layoutY="1.0" mnemonicParsing="false" onAction="#onBtnLogout" prefHeight="31.0" prefWidth="108.0" text="Déconnexion" />
+            <ChoiceBox fx:id="choiceBox" layoutX="329.0" layoutY="550.0" prefWidth="150.0" />
+            <TextField fx:id="searchBar" layoutX="479.0" layoutY="550.0" />
 			</children>
 		</AnchorPane>
 	</center>
 	<top>
-		<MenuBar fx:id="barMenu" prefHeight="32.0" prefWidth="1155.0" BorderPane.alignment="CENTER">
+		<MenuBar fx:id="barMenu" prefHeight="40.0" prefWidth="975.0" BorderPane.alignment="CENTER">
 			<menus>
 				<Menu mnemonicParsing="false" text="Etudiants">
 					<items>
 						<MenuItem mnemonicParsing="false" onAction="#onAjoutClickEtudiant" text="Ajouter étudiant">
-							<graphic>
-								<ImageView>
-									<image>
-										<Image url="@../../../../Downloads/plus%20icon.png" />
-									</image>
-								</ImageView>
-							</graphic>
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@plus%20icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
 						</MenuItem>
 						<SeparatorMenuItem mnemonicParsing="false" />
 						<MenuItem mnemonicParsing="false" onAction="#onShowListClick" text="Consulter liste étudiants">
-							<graphic>
-								<ImageView>
-									<image>
-										<Image url="@../../../../Downloads/list%20icon.png" />
-									</image>
-								</ImageView>
-							</graphic>
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@list%20icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
 						</MenuItem>
 						<SeparatorMenuItem mnemonicParsing="false" />
 						<MenuItem mnemonicParsing="false" onAction="#onclickSubMenuClose" text="Fermer" />
@@ -51,7 +54,7 @@
 				</Menu>
 				<Menu mnemonicParsing="false" text="Aide">
 					<items>
-						<MenuItem mnemonicParsing="false" text="A propos de" />
+						<MenuItem mnemonicParsing="false" onAction="#onShowHelp" text="A propos de" />
 					</items>
 				</Menu>
 			</menus>

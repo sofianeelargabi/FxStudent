@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="970.0" style="-fx-background-color: #9C2B27;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerAjout">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerAjout">
    <top>
       <MenuBar fx:id="barMenu" BorderPane.alignment="CENTER">
         <menus>
@@ -36,7 +36,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Aide">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#onShowHelp" text="A propos de" />
             </items>
           </Menu>
         </menus>
@@ -45,29 +45,30 @@
    <right>
       <AnchorPane fx:id="centerPane" prefHeight="608.0" prefWidth="975.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="172.0" layoutY="153.0" prefHeight="36.0" prefWidth="89.0" text="Nom" textFill="#d3d33e">
+            <Label layoutX="89.0" layoutY="189.0" prefHeight="36.0" prefWidth="89.0" text="Nom">
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <Label layoutX="172.0" layoutY="238.0" prefHeight="34.0" prefWidth="78.0" text="Prenom" textFill="#d3d33e">
+            <Label layoutX="95.0" layoutY="278.0" prefHeight="34.0" prefWidth="78.0" text="Prenom">
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <Label layoutX="172.0" layoutY="331.0" text="Naissance" textFill="#d3d33e">
+            <Label layoutX="89.0" layoutY="363.0" text="Naissance">
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <Label layoutX="400.0" layoutY="38.0" prefHeight="39.0" prefWidth="200.0" text="Ajouter un étudiant" textFill="#d3d33e">
+            <Label layoutX="402.0" layoutY="71.0" prefHeight="39.0" prefWidth="200.0" text="Ajouter un étudiant">
                <font>
                   <Font size="21.0" />
                </font></Label>
-            <TextField fx:id="nom" layoutX="392.0" layoutY="151.0" />
-            <TextField fx:id="prenom" layoutX="392.0" layoutY="238.0" />
-            <Button fx:id="browse" layoutX="728.0" layoutY="99.0" mnemonicParsing="false" onAction="#getTheUserFilePath" prefHeight="31.0" prefWidth="92.0" text="Parcourir" />
-            <Button fx:id="save" layoutX="436.0" layoutY="456.0" mnemonicParsing="false" onAction="#onBtnSave" prefHeight="31.0" prefWidth="99.0" text="Enregistrer" />
-            <DatePicker fx:id="datepick" editable="false" layoutX="392.0" layoutY="329.0" prefHeight="31.0" prefWidth="188.0" />
-            <ImageView fx:id="image" fitHeight="215.0" fitWidth="223.0" layoutX="681.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="url" layoutX="685.0" layoutY="407.0" prefHeight="31.0" prefWidth="227.0" visible="false" />
+            <TextField fx:id="nom" layoutX="267.0" layoutY="191.0" />
+            <TextField fx:id="prenom" layoutX="267.0" layoutY="279.0" />
+            <Button fx:id="browse" layoutX="651.0" layoutY="144.0" mnemonicParsing="false" onAction="#getTheUserFilePath" prefHeight="31.0" prefWidth="92.0" text="Parcourir" />
+            <Button fx:id="save" layoutX="437.0" layoutY="472.0" mnemonicParsing="false" onAction="#onBtnSave" prefHeight="31.0" prefWidth="99.0" text="Enregistrer" />
+            <Button layoutX="860.0" layoutY="1.0" mnemonicParsing="false" onAction="#onBtnLogout" prefHeight="31.0" prefWidth="109.0" text="Déconnexion" />          
+            <DatePicker fx:id="datepick" editable="false" layoutX="266.0" layoutY="362.0" prefHeight="31.0" prefWidth="188.0" />
+            <ImageView fx:id="image" fitHeight="215.0" fitWidth="223.0" layoutX="578.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="url" layoutX="583.0" layoutY="407.0" prefHeight="31.0" prefWidth="227.0" visible="false" />
          </children>
       </AnchorPane>
    </right>

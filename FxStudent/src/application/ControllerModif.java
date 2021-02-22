@@ -4,15 +4,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -24,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -31,7 +30,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -72,7 +70,7 @@ public class ControllerModif implements Initializable {
 	@FXML
 	private TextField tnom;
 	@FXML
-	private Button modify;
+	private Button modify,parcour;
 	@FXML
 	private Button cancel;
 	
@@ -93,6 +91,8 @@ public class ControllerModif implements Initializable {
 		dateText.setEditable(false);
 		dateField.setEditable(false);
 		url.setEditable(false);
+		parcour.setVisible(false);
+		parcour.setDisable(true);
 		modify.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -108,6 +108,8 @@ public class ControllerModif implements Initializable {
 				tnom.setEditable(true);
 				tprenom.setEditable(true);
 				modify.setText("Enregistrer");
+				parcour.setVisible(true);
+				parcour.setDisable(false);
 
 				modify.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
@@ -174,6 +176,7 @@ public class ControllerModif implements Initializable {
 		});
 
 	}
+	
 
 	public void setTableContent(List<Etudiant> etu) {
 		ObservableList<Etudiant> data = FXCollections.<Etudiant>observableArrayList();
@@ -229,6 +232,24 @@ public class ControllerModif implements Initializable {
 			// alert.showAndWait();
 		}
 
+	}
+	@FXML
+	public void onBtnLogout() throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Voulez-vous vraiment vous déconnecter ?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.get()==ButtonType.OK) {
+		BorderPane fxmlLoader = FXMLLoader.load(getClass().getResource("Connexion.fxml"));
+		mainPane.getChildren().setAll(fxmlLoader);
+		}
+		else {
+			alert.close();
+		}
+	}
+	@FXML
+	public void onShowHelp(ActionEvent event) throws IOException {
+
+		BorderPane fxmlLoader = FXMLLoader.load(getClass().getResource("Aide2.fxml"));
+		mainPane.getChildren().setAll(fxmlLoader);
 	}
 
 }

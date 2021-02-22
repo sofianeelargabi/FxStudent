@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="970.0" style="-fx-background-color: #9C2B27;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerConnexion">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerConnexion">
 	<top>
 		<MenuBar fx:id="barMenu" prefHeight="37.0" prefWidth="638.0" BorderPane.alignment="CENTER">
 			<menus>
@@ -21,7 +21,7 @@
 				</Menu>
             <Menu mnemonicParsing="false" text="Aide">
                <items>
-                  <MenuItem mnemonicParsing="false" text="A propos de" />
+                  <MenuItem mnemonicParsing="false" onAction="#onShowHelp" text="A propos de" />
                </items>
             </Menu>
 			</menus>
@@ -30,24 +30,24 @@
    <center>
       <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="connexionButton" layoutX="457.0" layoutY="428.0" mnemonicParsing="false" onAction="#onBtnConnexionClick" text="Connexion" />
-            <Label layoutX="274.0" layoutY="168.0" prefHeight="30.0" prefWidth="71.0" text="Login" textFill="#d3d33e">
+            <Button fx:id="connexionButton" layoutX="455.0" layoutY="462.0" mnemonicParsing="false" onAction="#onBtnConnexionClick" text="Connexion" />
+            <Label layoutX="274.0" layoutY="168.0" prefHeight="30.0" prefWidth="71.0" text="Login">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="274.0" layoutY="287.0" text="Mot de passe" textFill="#d3d33e">
+            <Label layoutX="274.0" layoutY="287.0" text="Mot de passe">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
             <TextField fx:id="login" layoutX="418.0" layoutY="167.0" />
-            <TextField fx:id="mdp" layoutX="418.0" layoutY="286.0" />
-            <Label layoutX="358.0" layoutY="47.0" prefHeight="31.0" prefWidth="333.0" text="Bienvenue sur le portail de l'école" textFill="#d3d33e">
+            <Label layoutX="358.0" layoutY="47.0" prefHeight="31.0" prefWidth="333.0" text="Bienvenue sur le portail de l'école">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
+            <PasswordField fx:id="mdp" layoutX="418.0" layoutY="287.0" />
          </children>
       </AnchorPane>
    </center>

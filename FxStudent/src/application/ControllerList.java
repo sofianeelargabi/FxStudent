@@ -10,21 +10,22 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,7 +45,9 @@ public class ControllerList implements Initializable {
 	@FXML
 	private DatePicker dateText;
 	@FXML
-	private TextField tnom;
+	private TextField tnom,searchBar;
+	@FXML
+	private ChoiceBox<String> choiceBox;
 	@FXML
 	AnchorPane centerPane;
 	@FXML
@@ -77,16 +80,26 @@ public class ControllerList implements Initializable {
 		colDate.setCellValueFactory(new PropertyValueFactory<>("dateProperty"));
 
 		setTableContent(EtudiantDaoFile.restitutionEtudiant());
-		
+		choiceBox.getItems().addAll("Nom", "Prénom");
+        choiceBox.setValue("Nom");
+        
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal)
+                -> {//reset table and searchBar when new choice is selected
+            if (newVal != null) {
+                searchBar.setText("");
+            }
+        });
+
 		if (Etudiant.incrementId==false) {
 		Long higherid=1L;
 		for (Etudiant stud : EtudiantDaoFile.listeEtudiant) {
 		if (higherid<stud.getIdProperty()) 
 			higherid=stud.getIdProperty();
-		}
+		
 		for (Long i =0L;i<higherid;i++) {
 		Etudiant.NEXT_ID.getAndIncrement();
-		}	
+		}
+		}
 		System.out.println("incremetation");
 		Etudiant.incrementId=true;
 		}
@@ -100,15 +113,39 @@ public class ControllerList implements Initializable {
 		colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenomProperty"));
 		colDate.setCellValueFactory(new PropertyValueFactory<>("dateProperty"));
 
+		
 		setTableContent(EtudiantDaoFile.restitutionEtudiant());
 
 	}
 	
 	public void setTableContent(List<Etudiant> etu) {
+
 		ObservableList<Etudiant> data = FXCollections.<Etudiant>observableArrayList();
+		FilteredList<Etudiant> filteredListEtudiant = new FilteredList<Etudiant>(data, p -> true);//Pass the data to a filtered list
+
 		data.addAll(etu);
-		table.setItems(data);
+		table.setItems(filteredListEtudiant);
+		searchBar.setPromptText("Recherchez ici!");
+        searchBar.textProperty().addListener((obs, oldValue, newValue) -> {
+            switch (choiceBox.getValue())//Switch on choiceBox value
+            {
+                case "Nom":
+                	filteredListEtudiant.setPredicate(p -> p.getNomProperty().toLowerCase().contains(newValue.toLowerCase().trim()));//filter table by last name
+                    break;
+                case "Prénom":
+                	filteredListEtudiant.setPredicate(p -> p.getPrenomProperty().toLowerCase().contains(newValue.toLowerCase().trim()));//filter table by first name
+                    break;
+                	
+            }
+        });
 	}
+	@FXML
+	public void onShowHelp(ActionEvent event) throws IOException {
+
+		BorderPane fxmlLoader = FXMLLoader.load(getClass().getResource("Aide2.fxml"));
+		mainPane.getChildren().setAll(fxmlLoader);
+	}
+
 
 	@FXML
 	public void onShowListClick(ActionEvent event) throws IOException {
@@ -179,7 +216,8 @@ public class ControllerList implements Initializable {
 							initialize2(null, null);
 							}
 							else {
-								initialize2(null, null);
+
+								alert.close();
 							}
 						});
 					}
@@ -208,5 +246,17 @@ public class ControllerList implements Initializable {
 
 	public void onclickSubMenuClose() {
 		Platform.exit();
+	}
+	@FXML
+	public void onBtnLogout() throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Voulez-vous vraiment vous déconnecter ?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.get()==ButtonType.OK) {
+		BorderPane fxmlLoader = FXMLLoader.load(getClass().getResource("Connexion.fxml"));
+		mainPane.getChildren().setAll(fxmlLoader);
+		}
+		else {
+			alert.close();
+		}
 	}
 }

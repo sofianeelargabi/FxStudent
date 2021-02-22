@@ -1,8 +1,11 @@
 package model;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import application.Matieres;
 import javafx.scene.control.Button;
 
 public class Etudiant implements Serializable {
@@ -17,8 +20,7 @@ public class Etudiant implements Serializable {
 	private String file;
 	private String image;
     public static AtomicLong NEXT_ID = new AtomicLong(1);
-	static Button modifyProperty;
-	static Button deleteProperty;
+	
 	public static boolean  incrementId = false;
 	public Etudiant() {
 
@@ -32,8 +34,16 @@ public class Etudiant implements Serializable {
 		this.file = file;
 		
 	}
+	public Etudiant(String nomProperty, String prenomProperty, String dateProperty, String file,HashMap <Matieres,List <Double>> liste) {
+		this.idProperty = NEXT_ID.getAndIncrement();
+		this.nomProperty = nomProperty;
+		this.prenomProperty = prenomProperty;
+		this.dateProperty = dateProperty;
+		this.file = file;
+		
+	}
 
-	@Override
+	
 	public String toString() {
 		return "Etudiant [idProperty=" + idProperty + ", nomProperty=" + nomProperty + ", prenomProperty="
 				+ prenomProperty + ", dateProperty=" + dateProperty + ", file=" + file + ", image=" + image + "]";

@@ -1,6 +1,5 @@
 package application;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,6 +10,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Etudiant;
@@ -22,8 +22,11 @@ public class EtudiantDaoFile implements IEtudiantDao, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	static List<Etudiant> listeEtudiant = new ArrayList<Etudiant>();
-	static HashMap<Long, Etudiant> elevenote = new HashMap<Long, Etudiant>();
+	static HashMap<List <String> ,List <Double>  > elevenote = new HashMap<>();
+	static List<String> matieres = new ArrayList<String>();
+	HashMap<Matieres,List <Double>> test = new HashMap<Matieres, List <Double>>();
 
+	
 	public List<Etudiant> getAll() {
 
 		return listeEtudiant;
@@ -33,8 +36,7 @@ public class EtudiantDaoFile implements IEtudiantDao, Serializable {
 
 		OutputStream w;
 		ObjectOutputStream dos;
-		// List<Etudiant> l = getAll();
-		// l.add(e);
+		
 
 		File file = new File("bd\\EtudiantTest.txt");
 		if (!file.exists()) {

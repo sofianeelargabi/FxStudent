@@ -1,21 +1,15 @@
 package application;
 
-import javafx.scene.paint.Color;
 import java.awt.image.BufferedImage;
-import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -35,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Etudiant;
@@ -104,6 +99,8 @@ public class ControllerAjout implements Initializable {
 				image.setImage(null);
 				url.setText("");
 				url.setVisible(false);
+				Alert alert = new Alert(AlertType.INFORMATION, "Etudiant enregistré avec succès", ButtonType.OK);
+				alert.showAndWait();
 
 			} else if (nom.getText() == null || nom.getText().equals("") || nom.getText().isEmpty()) {
 				nom.setEffect(ds);
@@ -179,5 +176,24 @@ public class ControllerAjout implements Initializable {
 	public void onclickSubMenuClose() {
 		Platform.exit();
 	}
+	@FXML
+	public void onBtnLogout() throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Voulez-vous vraiment vous déconnecter ?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.get()==ButtonType.OK) {
+		BorderPane fxmlLoader = FXMLLoader.load(getClass().getResource("Connexion.fxml"));
+		mainPane.getChildren().setAll(fxmlLoader);
+		}
+		else {
+			alert.close();
+		}
+	}
+	@FXML
+	public void onShowHelp(ActionEvent event) throws IOException {
+
+		BorderPane fxmlLoader = FXMLLoader.load(getClass().getResource("Aide2.fxml"));
+		mainPane.getChildren().setAll(fxmlLoader);
+	}
+
 
 }
